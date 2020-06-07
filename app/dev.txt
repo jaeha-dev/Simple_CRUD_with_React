@@ -1,0 +1,53 @@
++----------------------------------------------------------------------------------------------------------------------+
+* 컴포넌트 생명주기
+1. 컴포넌트 생성과 제거
+>> constructor -> componentWillMount -> render -> componentDidMount
+>> componentWillUnmount
+
+2. componentDidMount 메소드
+>> 컴포넌트 생성 후, 첫 렌더링이 완료되는 시점에 실행되는 메소드이다.
+   (이 안에서 다른 JS 프레임워크를 연동하거나 setTimeout, setInterval 및 Ajax 처리 등을 추가한다.)
+
+3. mount와 render
+>> mount: 컴포넌트가 생성되고 DOM에 주입되는 것을 의미하며 처음에 한번만 실행된다.
+>> render: DOM에 그려주는 작업으로, props나 state값이 변경될 때마다 이 작업을 수행한다.
+
+4. props와 state
+>> 리액트 컴포넌트에서 다루는 데이터에 props와 state가 존재한다.
+   (리액트는 부모 컴포넌트에서 자식 컴포넌트로 데이터 흐름이 이루어지는 단방향 데이터 흐름이 특징이다.)
+>> props: 부모 컴포넌트가 자식 컴포넌트에게 주는 값이다.
+   (자식 컴포넌트에서는 props를 받기만 하고, 받아온 props를 직접 수정할 수 없다.)
+>> props 값 변경
+   (componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate)
+>> state: 컴포넌트 내부에서 선언하며 내부에서 값을 변경 할 수 있는 값이다.
+>> state 값 변경
+  (shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate)
+
+5. 생성자
+>> 컴포넌트를 생성할 때 state 값을 초기화하거나 메소드를 바인딩할 때 생성자를 사용한다.
+>> React.Component를 상속한 컴포넌트의 생성자를 구현할 때는 super(props)를 선언한다.
+>> 생성자 내에서는 setState()를 사용하지 않고 this.state로 초기값을 할당한다.
+   (생성자는 this.state를 직접 할당할 수 있는 곳으로 생성자 외에는 this.setState()를 사용한다.)
+
+6. 이벤트 바인딩
+>> render() 안에 바인딩, constructor() 안에 바인딩, 오토바인딩 데코레이터 사용 등이 있다.
+
+7. 경로 매개변수, 선택적 매개변수
+>> <Route path="/posts/:year?/:month?" ...> 일 때, :는 경로 매개변수, ?는 선택적 매개변수
+   (/posts, /posts/2020, /posts/2020/06 모두 가능하다.)
+>> 라우팅 된 컴포넌트 내에서 경로 매개변수 값을 가져오려면 props.match.params.경로매개변수명을 사용한다.
+   (<h1>Product Details: {props.match.params.id}</h1>)
+
+8. static propTypes vs React.PropTypes (ES7과 ES6 차이)
+>> PropTypes는 리액트에서 타입 체크를 위해서 사용되는 라이브러리이다.
+>> static propTypes = { title: PropTypes.string.isRequired }
+   (title 값은 String 타입이어야 하며 필수로 지정되어야 한다는 의미이다.)
++----------------------------------------------------------------------------------------------------------------------+
+* 참고
+: https://kosaf04pyh.tistory.com/43, https://velopert.com/1130, https://velopert.com/3629,
+  https://firework-ham.tistory.com/m/29?category=868005, 
+  https://medium.com/@khwsc1/react에서의-바인딩-binding-방법들-a595ff9190b6,
+  https://ing-yeo.net/2019/09/react-beginner-5, https://www.daleseo.com/react-prop-types, 
+  https://stackoverflow.com/questions/39587496/static-proptypes-vs-react-proptypes,
+  https://jistol.github.io/frontend/2018/12/03/react-proptypes
++----------------------------------------------------------------------------------------------------------------------+
